@@ -5,7 +5,7 @@ var path         = require('path')
   , PostgresBackend = require('zag-backend-pg')
   , daemonHost   = "127.0.0.1:8876"
   , daemons      = [daemonHost]
-  , webHost      = "0.0.0.0:8875"
+  , webHost      = "0.0.0.0:8080"
   , DEFAULT_ENV  = "production"
   , argv         = process.argv
   , args         = argv.slice(2)
@@ -13,10 +13,13 @@ var path         = require('path')
 
 if (args.length === 0) usage()
 
-start(args[0], args[1])
+start(args[0], args[1], args[2])
 
-function start(db, env) {
-  env = env || DEFAULT_ENV
+function start(db, env, wh) {
+  console.log('Starting zag daemon + web...');
+  console.log(db, env);
+  env = env || DEFAULT_ENV;
+  wh = wh || webHost;
 
   zDaemon(
   { host:    daemonHost
