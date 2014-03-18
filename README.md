@@ -1,8 +1,7 @@
-## zag-standalone
+## zag-standalone for Webflow production
 
-If you are running [Zag](http://voxer.github.io/zag/) with production load
-you'll want to distribute it across multiple services, but for just getting
-started this one is enough.
+Assumes postgres backend
 
-[**Setup guide**](http://voxer.github.io/zag/#quick-start-guide)
-
+```
+postgres://postgres:1234@localhost/postgres
+```
