@@ -2,11 +2,11 @@
 var path         = require('path')
   , zWeb         = require('zag')
   , zDaemon      = require('zag-daemon')
-  , LevelBackend = require('zag-backend-leveldb')
+  , PostgresBackend = require('zag-backend-pg')
   , daemonHost   = "127.0.0.1:8876"
   , daemons      = [daemonHost]
   , webHost      = "0.0.0.0:8875"
-  , DEFAULT_ENV  = "dev"
+  , DEFAULT_ENV  = "production"
   , argv         = process.argv
   , args         = argv.slice(2)
   , l            = console.log
@@ -23,7 +23,7 @@ function start(db, env) {
   , join:    daemons
   , db:      db
   , env:     env
-  , backend: LevelBackend
+  , backend: PostgresBackend
   }).on("error", onError)
 
   zWeb(
@@ -31,7 +31,7 @@ function start(db, env) {
   , db:      db
   , env:     env
   , daemons: daemons
-  , backend: LevelBackend
+  , backend: PostgresBackend
   // This directory needs to be readable and writable by the process.
   , public:  "/tmp/metrics-standalone-public"
   }).on("error", onError).on("ready", function() {
